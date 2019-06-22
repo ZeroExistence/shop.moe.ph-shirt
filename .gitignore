@@ -1,3 +1,9 @@
+# Custom ignore
+media/*
+static/*
+core/settings.py
+core/shirt/migrations/00*.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

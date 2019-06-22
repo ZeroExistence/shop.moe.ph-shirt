@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+<title>
+moe.ph &middot; cute and depressed
+</title>
+{% endblock %}
+
+
+{% block meta %}
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="moe.ph &middot; cute and depressed" />
+<meta property="og:description" content="Browse by Available Sizes" />
+<meta property="og:image" content="{{ size.inventory_set.last.shirt.image.first.image.url }}" />
+
+<meta name="moe.ph &middot; cute and depressed" content="cute and depressed">
+{% endblock %}
+
+{% block content %}
+<div class="container content">
+<div class="clearfix">
+{% for size in size_list %}
+<div class="page sm-col sm-col-12 md-col-6">
+    <a href="{% url 'size-shirt' size.code %}">
+        <h2 class="page-title">{{ size.name }}</h2>
+        <img src="{{ size.inventory_set.last.shirt.image.first.image.thumbnail.600x600.url }}" alt="{{ printtype.name }}" />
+    </a>
+</div>
+{% endfor %}
+</div>
+</div>
+
+{% endblock %}

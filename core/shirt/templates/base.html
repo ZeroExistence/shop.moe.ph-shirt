@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+    <head>
+        {% load static %}
+        <link href="http://gmpg.org/xfn/11" rel="profile">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+      
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+        
+        {% block title %} {% endblock %}
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="{% static 'css/poole.css' %}">
+        <link rel="stylesheet" href="{% static 'css/lanyon.css' %}">
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+      
+        <!-- Icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'moe-ph-logo.png' %}">
+        <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+      
+        {% block meta %} {% endblock %}
+
+    </head>
+
+<body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>moe.ph &middot; cute and depressed</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/shirt">Home</a>
+
+    <a class="sidebar-nav-item" href="/shirt/all">Full Catalog</a>
+    <a class="sidebar-nav-item" href="/shirt/print">Browse by Print Type</a>
+    <a class="sidebar-nav-item" href="/shirt/brand">Browse by Shirt Brand</a>
+    <a class="sidebar-nav-item" href="/shirt/size">Browse by Available Sizes</a>
+
+    <span class="sidebar-nav-item">Social Media Links</span>
+
+    <a class="sidebar-nav-item" href="https://facebook.com/be.moe.ph">Facebook Page</a>
+    <a class="sidebar-nav-item" href="https://m.me/be.moe.ph">Messenger Link</a>
+    <a class="sidebar-nav-item" href="https://github.com/ZeroExistence">GitHub Repository</a>
+
+    <span class="sidebar-nav-item">Currently v site.version</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; moe.ph. All rights reserved.<br> Made with Django, Lanyon, and basscss.
+    </p>
+  </div>
+</div>
+
+<div class="wrap">
+    <div class="masthead">
+        <div class="container">
+            <h3 class="masthead-title">
+            <a href="/shirt" title="Home">moe.ph</a>
+            <small>cute and depressed</small>
+            </h3>
+        </div>
+    </div>
+
+{% block content %} {% endblock %}
+
+</div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

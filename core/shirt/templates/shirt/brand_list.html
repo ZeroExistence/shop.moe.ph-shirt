@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>
+moe.ph &middot; cute and depressed
+</title>
+{% endblock %}
+
+
+{% block meta %}
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="moe.ph &middot; cute and depressed" />
+<meta property="og:description" content="cute and depressed" />
+<meta property="og:image" content="{{ shirt_list.first.image.first.image.url }}" />
+
+<meta name="moe.ph &middot; cute and depressed" content="cute and depressed">
+{% endblock %}
+
+{% block content %}
+<div class="container content">
+<div class="clearfix">
+{% for brand in brand_list %}
+<div class="page sm-col md-col-6">
+    <a href="{% url 'brand-shirt' brand.code %}">
+        <h2 class="page-title">{{ brand.name }}</h2>
+        <img src="{{ brand.shirt_set.first.image.first.image.thumbnail.600x600.url }}" alt="{{ printtype.name }}" />
+    </a>
+</div>
+{% endfor %}
+</div>
+</div>
+
+{% endblock %}
