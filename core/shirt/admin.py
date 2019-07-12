@@ -29,7 +29,7 @@ class GalleryInline(admin.TabularInline):
 class ShirtModelAdmin(admin.ModelAdmin):
     inlines = [ImageInline, InventoryInline, GalleryInline]
 
-    list_display = ('name', 'get_available_sizes', 'get_print_type', 'get_shirt_brand')
+    list_display = ('name', 'get_available_sizes', 'get_print_type', 'get_shirt_brand', 'price')
 
     def save_model(self, request, obj, form, change):
         obj.save()

@@ -21,6 +21,7 @@ from django.views.generic import RedirectView
 from core.shirt import views
 
 urlpatterns = [
+    path('shirt/admin', admin.site.urls),
     path('', RedirectView.as_view(url='/shirt'), name='shirt-root'),
     path('shirt', views.ShirtListView.as_view(), name='shirt-list'),
     path('shirt/all', views.FullShirtView.as_view(), name='full-shirt'),
@@ -31,4 +32,4 @@ urlpatterns = [
     path('shirt/size', views.SizeView.as_view(), name='size'),   
     path('shirt/size/<slug:size>', views.SizeShirtView.as_view(), name='size-shirt'),   
     path('shirt/item/<slug:shirt>', views.ShirtDetailView.as_view(), name='shirt-detail'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

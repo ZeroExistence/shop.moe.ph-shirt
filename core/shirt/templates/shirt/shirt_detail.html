@@ -1,6 +1,10 @@
 {% extends base_template %}
 
 {% block title %}
+<!-- Require a canonical link to HTML. Will put this on block later -->
+<link rel="canonical" href="{{ request.path }}">
+<link rel="amphtml" href="{{ request.path }}?amp=1">
+    
 <title>
 {{ shirt.name }} &middot; moe.ph
 </title>
@@ -8,18 +12,19 @@
 
 
 {% block meta %}
-<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+<meta property="og:url" content="{{ request.path }}" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="{{ shirt.name }} &middot; moe.ph" />
 <meta property="og:description" content="{{ shirt.description | truncatechars:190 }}" />
 <meta property="og:image" content="{{ shirt.image.first.image.url }}" />
 
-<meta name="{{ shirt.name }} &middot; moe.ph" content="{{ shirt.description }}">
+<meta name="{{ shirt.name }} &middot; moe.ph" content="{{ shirt.description }}" />
 {% endblock %}
 
 
 {% block content %}
 {% if request.GET.amp == "1" %}
+<div class="container">
 <amp-img src="{{ shirt.image.first.image.url }}" alt="{{ shirt.name }}" layout="responsive" width="600" height="600"></amp-img>
 <br>
 <span class="post-date">Last Updated: {{ shirt.updated_at.date }}</span>
@@ -29,15 +34,17 @@
 <h3>Available Sizes: <small>{{ shirt.get_available_sizes }}</small></h3>
 <h3>Print Type: <small>{{ shirt.get_print_type }}</small></h3>
 <h3>Brand: <small>{{ shirt.get_shirt_brand }}</small></h3>
+<h3>Shipping Fee: <br/><small>Luzon: PHP 85 / Manila: PHP 95 / Visayas: PHP 100 / Mindanao: PHP 105</small></h3>
 <h3 class="center">To order, just contact us in our Facebook Page <a href="https://facebook.com/be.moe.ph">moe.ph</a></h3>
 {% if shirt.gallery.all %}
 <hr>
 <h2>Customer Submitted Gallery</h2>
 <amp-carousel layout="fixed-height" height="600" type="slides" >
 {% for gallery in shirt.gallery.all %}
-<amp-img src="{{ gallery.image.thumbnail.600x600.url }}" alt="{{ gallery.credit }}" layout="responsive" width="600" height="600"></amp-img>
+<amp-img src="{{ gallery.image.thumbnail.760x600.url }}" alt="{{ gallery.credit }}" layout="responsive" width="760" height="600"></amp-img>
 {% endfor %}
 </amp-carousel>
+</div>
 {% endif %}
 
 
@@ -52,12 +59,13 @@
 <div class="post sm-col sm-col-12">
         
         <span class="post-date">Last Updated: {{ shirt.updated_at.date }}</span>
-        <h2>{{ shirt.description }}</h2>
+        <h1 class="post-title">{{ shirt.name }}</h1>
         <hr>
         <h3>Price: <small>P{{ shirt.price }}</small></h3>
         <h3>Available Sizes: <small>{{ shirt.get_available_sizes }}</small></h3>
         <h3>Print Type: <small>{{ shirt.get_print_type }}</small></h3>
         <h3>Brand: <small>{{ shirt.get_shirt_brand }}</small></h3>
+        <h3>Shipping Fee: <br/><small>Luzon: PHP 85 / Manila: PHP 95 / Visayas: PHP 100 / Mindanao: PHP 105</small></h3>
         <h3 class="center">To order, just contact us in our Facebook Page <a href="https://facebook.com/be.moe.ph">moe.ph</a></h3>
 </div>
 
@@ -67,11 +75,20 @@
 <hr>
 <div class="clearfix">
 <h2>Customer Submitted Gallery</h2>
-{% for gallery in shirt.gallery.all %}
+{# for gallery in shirt.gallery.all #}
+<!--
 <div class="sm-col sm-col-12 md-col-6">
 <img src="{{ gallery.image.thumbnail.600x600.url }}" alt="{{ gallery.credit }}" />
 </div>
+-->
+
+<amp-carousel layout="fixed-height" height="600" type="slides" >
+{% for gallery in shirt.gallery.all %}
+<amp-img src="{{ gallery.image.thumbnail.760x600.url }}" alt="{{ gallery.credit }}" layout="responsive" width="760" height="600"></amp-img>
 {% endfor %}
+</amp-carousel>
+
+{# endfor #}
 </div>
 
 {% endif %}
