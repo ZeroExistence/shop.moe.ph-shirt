@@ -1,6 +1,5 @@
 # Custom ignore
 media/*
-static/*
 core/settings.py
 core/shirt/migrations/00*.py
 

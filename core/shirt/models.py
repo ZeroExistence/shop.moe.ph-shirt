@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
-from versatileimagefield.fields import VersatileImageField
+from versatileimagefield.fields import VersatileImageField, PPOIField
 
 # Create your models here.
 
@@ -81,7 +81,9 @@ class Image(models.Model):
     shirt = models.ForeignKey(Shirt, related_name='image', on_delete=models.CASCADE)
     image = VersatileImageField(
         'Image',
-        upload_to=upload_media)
+        upload_to=upload_media,
+        ppoi_field='center_point')
+    center_point = PPOIField('Image Center Point of Interest')
     weight = models.PositiveSmallIntegerField(default=9)
 
     def __str__(self):
@@ -126,7 +128,9 @@ class Gallery(models.Model):
     shirt = models.ForeignKey(Shirt, related_name='gallery', on_delete=models.CASCADE)
     image = VersatileImageField(
         'Image',
-        upload_to=upload_media)
+        upload_to=upload_media,
+        ppoi_field='center_point')
+    center_point = PPOIField('Image Center Point of Interest')
     credit = models.CharField(max_length=200, null=True, blank=True)
     weight = models.PositiveSmallIntegerField(default=9)
     updated_at = models.DateTimeField(auto_now=True)

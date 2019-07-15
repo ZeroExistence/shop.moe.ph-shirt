@@ -2,8 +2,7 @@
 
 {% block title %}
 <!-- Require a canonical link to HTML. Will put this on block later -->
-<link rel="canonical" href="{{ request.path }}">
-<link rel="amphtml" href="{{ request.path }}?amp=1">
+<link rel="canonical" href="{{ build_absolute_uri }}">
     
 <title>
 {{ shirt.name }} &middot; moe.ph
@@ -12,11 +11,11 @@
 
 
 {% block meta %}
-<meta property="og:url" content="{{ request.path }}" />
+<meta property="og:url" content="{{ build_absolute_uri }}" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="{{ shirt.name }} &middot; moe.ph" />
 <meta property="og:description" content="{{ shirt.description | truncatechars:190 }}" />
-<meta property="og:image" content="{{ shirt.image.first.image.url }}" />
+<meta property="og:image" content="{{ shirt.image.first.image.crop.1200x628 }}" />
 
 <meta name="{{ shirt.name }} &middot; moe.ph" content="{{ shirt.description }}" />
 {% endblock %}
@@ -39,9 +38,14 @@
 {% if shirt.gallery.all %}
 <hr>
 <h2>Customer Submitted Gallery</h2>
-<amp-carousel layout="fixed-height" height="600" type="slides" >
+<amp-carousel class="carousel-caption" layout="fixed-height" height="600" type="slides">
 {% for gallery in shirt.gallery.all %}
-<amp-img src="{{ gallery.image.thumbnail.760x600.url }}" alt="{{ gallery.credit }}" layout="responsive" width="760" height="600"></amp-img>
+<div class="slide">
+<amp-img src="{{ gallery.image.thumbnail.760x600.url }}" alt="{{ gallery.credit }}" layout="responsive" width="760" height="600" attribution="CREDIT: PPPP"></amp-img>
+{% if gallery.credit is not None %}
+<div class="caption">CREDIT: {{ gallery.credit | safe }} </div>
+{% endif %}
+</div>
 {% endfor %}
 </amp-carousel>
 </div>
@@ -82,9 +86,14 @@
 </div>
 -->
 
-<amp-carousel layout="fixed-height" height="600" type="slides" >
+<amp-carousel class="carousel-caption" layout="fixed-height" height="600" type="slides">
 {% for gallery in shirt.gallery.all %}
+<div class="slide">
 <amp-img src="{{ gallery.image.thumbnail.760x600.url }}" alt="{{ gallery.credit }}" layout="responsive" width="760" height="600"></amp-img>
+{% if gallery.credit is not None %}
+<div class="caption">CREDIT: {{ gallery.credit | safe }} </div>
+{% endif %}
+</div>
 {% endfor %}
 </amp-carousel>
 

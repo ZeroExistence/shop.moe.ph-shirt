@@ -1,0 +1,156 @@
+/*
+ * Container
+ *
+ * Center the page content.
+ */
+
+ .container {
+    max-width: 28rem;
+  }
+  @media (min-width: 38em) {
+    .container {
+      max-width: 32rem;
+    }
+  }
+  @media (min-width: 60em) {
+    .container {
+      max-width: 40rem;
+    }
+  }
+  @media (min-width: 72em) {
+    .container {
+      max-width: 50rem;
+    }
+  }
+
+  .clearfix:after,
+  .clearfix:before{content:" ";display:table}
+  .clearfix:after{clear:both}
+
+  .col{float:left}.col,.col-right{box-sizing:border-box}.col-right{float:right}.col-1{width:8.33333%}.col-2{width:16.66667%}.col-3{width:25%}.col-4{width:33.33333%}.col-5{width:41.66667%}.col-6{width:50%}.col-7{width:58.33333%}.col-8{width:66.66667%}.col-9{width:75%}.col-10{width:83.33333%}.col-11{width:91.66667%}.col-12{width:100%}
+  @media (min-width:38em){.sm-col{float:left;box-sizing:border-box}.sm-col-right{float:right;box-sizing:border-box}.sm-col-1{width:8.33333%}.sm-col-2{width:16.66667%}.sm-col-3{width:25%}.sm-col-4{width:33.33333%}.sm-col-5{width:41.66667%}.sm-col-6{width:50%}.sm-col-7{width:58.33333%}.sm-col-8{width:66.66667%}.sm-col-9{width:75%}.sm-col-10{width:83.33333%}.sm-col-11{width:91.66667%}.sm-col-12{width:100%}}
+  @media (min-width:60em){.md-col{float:left;box-sizing:border-box}.md-col-right{float:right;box-sizing:border-box}.md-col-1{width:8.33333%}.md-col-2{width:16.66667%}.md-col-3{width:25%}.md-col-4{width:33.33333%}.md-col-5{width:41.66667%}.md-col-6{width:50%}.md-col-7{width:58.33333%}.md-col-8{width:66.66667%}.md-col-9{width:75%}.md-col-10{width:83.33333%}.md-col-11{width:91.66667%}.md-col-12{width:100%}}
+  @media (min-width:72em){.lg-col{float:left;box-sizing:border-box}.lg-col-right{float:right;box-sizing:border-box}.lg-col-1{width:8.33333%}.lg-col-2{width:16.66667%}.lg-col-3{width:25%}.lg-col-4{width:33.33333%}.lg-col-5{width:41.66667%}.lg-col-6{width:50%}.lg-col-7{width:58.33333%}.lg-col-8{width:66.66667%}.lg-col-9{width:75%}.lg-col-10{width:83.33333%}.lg-col-11{width:91.66667%}.lg-col-12{width:100%}}
+
+  .center{text-align:center}
+
+  .page, .post {
+    margin-bottom: 1em;
+  }
+
+  .page-description {
+    margin: 1em;
+  }
+
+  .masthead {
+    margin-bottom: 1rem;
+  }
+
+  /* Magenta */
+  .theme-base-ee .sidebar,
+  .theme-base-ee .sidebar-toggle:active,
+  .theme-base-ee #sidebar-checkbox:checked ~ .sidebar-toggle {
+    background-color: #ee4ae0;
+  }
+  .theme-base-ee .container a,
+  .theme-base-ee .sidebar-toggle,
+  .theme-base-ee .related-posts li a:hover {
+    color: #ee4ae0;
+  }
+  
+.btn {
+  font-family: var(--button-font-family);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  line-height: var(--button-line-height);
+  padding: var(--button-padding-y) var(--button-padding-x);
+  margin: 0;
+  height: auto;
+  border: var(--border-width) solid transparent;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  color: inherit;
+  background-color: transparent;
+}
+
+.btn:hover {
+  text-decoration: none;
+}
+
+.btn:focus {
+  outline: none;
+  border-color: var(--darken-2);
+  box-shadow: 0 0 0 3px var(--darken-3);
+}
+
+::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+:root {
+  --border-width: 1px;
+  --bold-font-weight: bold;
+  --button-font-family: inherit;
+  --button-font-size: inherit;
+  --button-font-weight: var(--bold-font-weight);
+  --button-line-height: 1.125rem;
+  --button-padding-y: .5rem;
+  --button-padding-x: 1rem;
+  --darken-2: rgba(0, 0, 0, .125);
+  --darken-3: rgba(0, 0, 0, .25);
+}
+
+.btn-outline,
+.btn-outline:hover {
+  border-color: currentcolor;
+}
+
+.btn-outline {
+  border-radius: var(--border-radius);
+}
+
+.btn-outline:hover {
+  box-shadow: inset 0 0 0 20rem var(--darken-1);
+}
+
+.btn-outline:active {
+  box-shadow: inset 0 0 0 20rem var(--darken-2),
+    inset 0 3px 4px 0 var(--darken-3),
+    0 0 1px var(--darken-2);
+}
+
+.btn-outline:disabled,
+.btn-outline.is-disabled {
+  opacity: .5;
+}
+
+:root {
+  --border-radius: 3px;
+  --darken-1: rgba(0, 0, 0, .0625);
+  --darken-2: rgba(0, 0, 0, .125);
+  --darken-3: rgba(0, 0, 0, .25);
+}
+
+
+.carousel-caption {
+  background: var(--color-bg-light);
+  margin: var(--space-2) 0;
+}
+.carousel-caption .slide > amp-img > img{
+  object-fit: contain;
+}
+.carousel-caption .caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: .5rem;
+  background: rgba(0, 0, 0, 0.6);
+  font-size: smaller;
+  max-height: 30%;
+  color: #ffffff;
+}

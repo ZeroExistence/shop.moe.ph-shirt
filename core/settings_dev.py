@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'core.urls'
+ROOT_URLCONF = 'core.urls_dev'
 
 TEMPLATES = [
     {
@@ -120,13 +120,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/shirt/static/'
-
+STATIC_URL = '/static/'
+STATIC_ROOT = '/data/static'
 STATICFILES_DIRS = [
-    "/data/static",
+    os.path.join(BASE_DIR, "static")
 ]
 
-MEDIA_URL = '/shirt/media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = '/data/media'
 
 # Settings to custom strip middleware
