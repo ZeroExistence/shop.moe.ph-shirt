@@ -2,7 +2,7 @@
 
 {% block title %}
 <!-- Require a canonical link to HTML. Will put this on block later -->
-<link rel="canonical" href="{{ build_absolute_uri }}">
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
     
 <title>
 {{ shirt.name }} &middot; moe.ph
@@ -11,7 +11,7 @@
 
 
 {% block meta %}
-<meta property="og:url" content="{{ build_absolute_uri }}" />
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="{{ shirt.name }} &middot; moe.ph" />
 <meta property="og:description" content="{{ shirt.description | truncatechars:190 }}" />
