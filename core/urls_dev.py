@@ -14,11 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import RedirectView
+from graphene_django.views import GraphQLView
 from core.shirt import views
+
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'shirt', views.ShirtViewSet)
 
 urlpatterns = [
     path('shirt/admin', admin.site.urls),
@@ -32,4 +38,6 @@ urlpatterns = [
     path('shirt/size', views.SizeView.as_view(), name='size'),   
     path('shirt/size/<slug:size>', views.SizeShirtView.as_view(), name='size-shirt'),   
     path('shirt/item/<slug:shirt>', views.ShirtDetailView.as_view(), name='shirt-detail'),
+    path("shirt/graphql", GraphQLView.as_view(graphiql=True)),
+    path('shirt/api/', include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

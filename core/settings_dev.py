@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'versatileimagefield',
+    'graphene_django',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -139,4 +141,20 @@ VERSATILEIMAGEFIELD_SETTINGS = {
     # should be stored in the cache. Defaults to `2592000` (30 days)
     'cache_length': 2592000,
     'jpeg_resize_quality': 90,
+}
+
+VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
+    'image_size': [
+        ('original', 'url'),
+		('zoom_33', 'zoom_33__1280x1280'),
+		('zoom_50', 'zoom_50__1280x1280'),
+		('zoom_75', 'zoom_75__1280x1280'),
+		('thumb_1280', 'thumbnail__1280x1280'),
+		('thumb_600', 'thumbnail__600x600'),
+		]
+}
+
+
+GRAPHENE = {
+	'SCHEMA': 'core.schema.schema',
 }
