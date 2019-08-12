@@ -1,4 +1,4 @@
-FROM docker.io/library/python:rc-slim-stretch
+FROM docker.io/library/python:rc-slim-buster
 LABEL maintainer="ZeroExistence"
 
 RUN useradd -m -d /app -u 44440 python
