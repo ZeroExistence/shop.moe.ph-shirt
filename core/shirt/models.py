@@ -55,7 +55,7 @@ class Shirt(models.Model):
 
     def get_available_sizes(self):
         text = ''
-        for inventory in self.inventory_set.all():
+        for inventory in self.inventory.all():
             if inventory.stock > 0:
                 if text == '':
                     text = inventory.size.name
@@ -112,7 +112,7 @@ class Size(models.Model):
 
 
 class Inventory(models.Model):
-    shirt = models.ForeignKey(Shirt, on_delete=models.CASCADE)
+    shirt = models.ForeignKey(Shirt, related_name='inventory', on_delete=models.CASCADE)
     size = models.ForeignKey(Size, on_delete=models.CASCADE)
     stock = models.PositiveSmallIntegerField(default=0)
 

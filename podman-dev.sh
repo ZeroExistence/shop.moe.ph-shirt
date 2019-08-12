@@ -1,1 +1,1 @@
-podman run --name shopdev --rm -ti -v vpydev:/app -v vshop:/data devpython
+podman run --name shopdev --rm -ti -v vshop:/data -v vpydev:/app devpython:3.8-latest

@@ -2,6 +2,11 @@ from django.shortcuts import render
 from django.views import generic
 from django.http import Http404
 
+#REST Related
+from rest_framework import viewsets, pagination
+from django_filters import rest_framework as filters
+from .serializers import ShirtSerializer
+
 # Create your views here.
 
 from .models import Shirt, Image, PrintType, Brand, Size, Inventory
@@ -74,3 +79,23 @@ class SizeShirtView(generic.ListView):
 
 class SizeView(generic.ListView):
     model = Size
+    
+    
+#REST Related
+class ShirtFilter(filters.FilterSet):
+	name = filters.CharFilter(field_name='name', lookup_expr='icontains')
+
+	class Meta:
+		model = Shirt
+		fields = ['name']
+
+class ShirtPagination(pagination.PageNumberPagination):
+	page_size = 20
+	page_size_query_param = 'page_size'
+	max_page_size = 100
+	
+class ShirtViewSet(viewsets.ReadOnlyModelViewSet):
+	serializer_class = ShirtSerializer
+	filterset_class = ShirtFilter
+	pagination_class = ShirtPagination
+	queryset = Shirt.objects.all()

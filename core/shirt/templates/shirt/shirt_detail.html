@@ -24,7 +24,7 @@
 {% block content %}
 {% if request.GET.amp == "1" %}
 <div class="container">
-<amp-img src="{{ shirt.image.first.image.url }}" alt="{{ shirt.name }}" layout="responsive" width="600" height="600"></amp-img>
+<amp-img src="{{ shirt.image.first.image.thumbnail.1028x1028.url }}" alt="{{ shirt.name }}" layout="responsive" width="600" height="600"></amp-img>
 <br>
 <span class="post-date">Last Updated: {{ shirt.updated_at.date }}</span>
 <h1 class="post-title">{{ shirt.name }}</h1>
@@ -41,7 +41,7 @@
 <amp-carousel class="carousel-caption" layout="fixed-height" height="600" type="slides">
 {% for gallery in shirt.gallery.all %}
 <div class="slide">
-<amp-img src="{{ gallery.image.thumbnail.760x600.url }}" alt="{{ gallery.credit }}" layout="responsive" width="760" height="600" attribution="CREDIT: PPPP"></amp-img>
+<amp-img src="{{ gallery.image.thumbnail.760x600.url }}" alt="{{ gallery.credit }}" layout="fill" width="760" height="600" attribution="CREDIT: PPPP"></amp-img>
 {% if gallery.credit is not None %}
 <div class="caption">CREDIT: {{ gallery.credit | safe }} </div>
 {% endif %}
@@ -57,7 +57,7 @@
 <div class="container content">
 <div class="clearfix">
 <div class="post sm-col sm-col-12">
-    <img src="{{ shirt.image.first.image.url }}" alt="{{ shirt.name }}">
+    <img src="{{ shirt.image.first.image.thumbnail.1028x1028.url }}" alt="{{ shirt.name }}">
 </div>
 
 <div class="post sm-col sm-col-12">
@@ -89,7 +89,7 @@
 <amp-carousel class="carousel-caption" layout="fixed-height" height="600" type="slides">
 {% for gallery in shirt.gallery.all %}
 <div class="slide">
-<amp-img src="{{ gallery.image.thumbnail.760x600.url }}" alt="{{ gallery.credit }}" layout="responsive" width="760" height="600"></amp-img>
+<amp-img src="{{ gallery.image.thumbnail.760x600.url }}" alt="{{ gallery.credit }}" layout="fill" width="760" height="600"></amp-img>
 {% if gallery.credit is not None %}
 <div class="caption">CREDIT: {{ gallery.credit | safe }} </div>
 {% endif %}
