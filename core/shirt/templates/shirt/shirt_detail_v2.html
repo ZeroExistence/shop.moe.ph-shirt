@@ -3,7 +3,7 @@
 {% block title %}
 <!-- Require a canonical link to HTML. Will put this on block later -->
 <link rel="canonical" href="{{ request.build_absolute_uri }}">
-    
+
 <title>
 {{ shirt.name }} &middot; moe.ph
 </title>
@@ -79,16 +79,30 @@
 {% if shirt.gallery.all %}
 <hr>
 <h2>Customer Submitted Gallery</h2>
-<amp-carousel class="carousel-caption" layout="fixed-height" height="600" type="slides">
+<amp-carousel class="carousel-caption" layout="fixed-height" height="640" type="slides" id="GalleryCarousel" on="slideChange:GalleryCarouselSelector.toggle(index=event.index, value=true),carouselPreview.goToSlide(index=event.index)">
 {% for gallery in shirt.gallery.all %}
 <div class="slide">
-<amp-img src="{{ gallery.image.thumbnail.760x600.url }}" alt="{{ gallery.credit }}" layout="fill" width="760" height="600" attribution="CREDIT: PPPP"></amp-img>
+<amp-img src="{{ gallery.image.thumbnail.720x600.url }}" alt="{{ gallery.credit }}" layout="fill" width="600" height="600" attribution="{{ gallery.credit }}"></amp-img>
 {% if gallery.credit is not None %}
 <div class="caption">CREDIT: {{ gallery.credit | safe }} </div>
 {% endif %}
 </div>
 {% endfor %}
 </amp-carousel>
+<amp-selector id="GalleryCarouselSelector"
+    on="select:GalleryCarousel.goToSlide(index=event.targetOption)"
+    layout="container">
+    <amp-carousel id="carouselPreview" class="carousel-preview" height="72" layout="fixed-height" type="carousel">
+    {% for gallery in shirt.gallery.all %}
+    <amp-img option="{{ forloop.counter0 }}"
+      {% if forloop.counter0 == 0 %} selected {% endif %}
+      src="{{ gallery.image.crop.60x60.url }}"
+      width="60"
+      height="60"
+      alt="a sample image"></amp-img>
+    {% endfor %}
+    </amp-carousel>
+  </amp-selector>
 {% endif %}
 
 </div>
