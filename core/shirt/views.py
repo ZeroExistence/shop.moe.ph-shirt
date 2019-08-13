@@ -11,6 +11,7 @@ from .serializers import ShirtSerializer
 
 from .models import Shirt, Image, PrintType, Brand, Size, Inventory
 
+
 class ShirtListView(generic.ListView):
     model = Shirt
     paginate_by = 6
@@ -28,15 +29,6 @@ class ShirtDetailView(generic.DetailView):
             return Shirt.objects.get(code=self.kwargs['shirt'])
         except Shirt.DoesNotExist:
             raise Http404()
-
-    # Trying to modify the context using the request. Not working. WIP
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if self.request.GET.get('amp', 0) == "1":
-            context['base_template'] = "amp-base.html"
-        else:
-            context['base_template'] = "base.html"
-        return context
 
 
 class PrintShirtView(generic.ListView):
@@ -79,8 +71,8 @@ class SizeShirtView(generic.ListView):
 
 class SizeView(generic.ListView):
     model = Size
-    
-    
+
+
 #REST Related
 class ShirtFilter(filters.FilterSet):
 	name = filters.CharFilter(field_name='name', lookup_expr='icontains')
@@ -89,11 +81,13 @@ class ShirtFilter(filters.FilterSet):
 		model = Shirt
 		fields = ['name']
 
+
 class ShirtPagination(pagination.PageNumberPagination):
 	page_size = 20
 	page_size_query_param = 'page_size'
 	max_page_size = 100
-	
+
+
 class ShirtViewSet(viewsets.ReadOnlyModelViewSet):
 	serializer_class = ShirtSerializer
 	filterset_class = ShirtFilter
@@ -113,12 +107,12 @@ class DevShirtDetailView(generic.DetailView):
             return Shirt.objects.get(code=self.kwargs['shirt'])
         except Shirt.DoesNotExist:
             raise Http404()
-            
+
 class DevShirtListView(generic.ListView):
     model = Shirt
     paginate_by = 6
     template_name = "shirt/shirt_list_v2.html"
-    
+
 class DevFullShirtView(generic.ListView):
     model = Shirt
     template_name = "shirt/shirt_list_v2.html"
