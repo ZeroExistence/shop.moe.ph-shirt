@@ -99,3 +99,26 @@ class ShirtViewSet(viewsets.ReadOnlyModelViewSet):
 	filterset_class = ShirtFilter
 	pagination_class = ShirtPagination
 	queryset = Shirt.objects.all()
+
+
+
+###################### DEV SECTION =============================
+
+class DevShirtDetailView(generic.DetailView):
+    model = Shirt
+    template_name = "shirt/shirt_detail_v2.html"
+
+    def get_object(self):
+        try:
+            return Shirt.objects.get(code=self.kwargs['shirt'])
+        except Shirt.DoesNotExist:
+            raise Http404()
+            
+class DevShirtListView(generic.ListView):
+    model = Shirt
+    paginate_by = 6
+    template_name = "shirt/shirt_list_v2.html"
+    
+class DevFullShirtView(generic.ListView):
+    model = Shirt
+    template_name = "shirt/shirt_list_v2.html"

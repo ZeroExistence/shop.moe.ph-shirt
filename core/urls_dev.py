@@ -38,6 +38,9 @@ urlpatterns = [
     path('shirt/size', views.SizeView.as_view(), name='size'),   
     path('shirt/size/<slug:size>', views.SizeShirtView.as_view(), name='size-shirt'),   
     path('shirt/item/<slug:shirt>', views.ShirtDetailView.as_view(), name='shirt-detail'),
+    path('dev/shirt', views.DevShirtListView.as_view(), name='dev-shirt-list'),
+    path('dev/shirt/all', views.DevFullShirtView.as_view(), name='dev-full-shirt'),
+    path('dev/shirt/item/<slug:shirt>', views.DevShirtDetailView.as_view(), name='dev-shirt-detail'),
     path("shirt/graphql", GraphQLView.as_view(graphiql=True)),
     path('shirt/api/', include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
