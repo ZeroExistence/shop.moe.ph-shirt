@@ -1,6 +1,7 @@
 <!doctype html>
 <html ⚡>
 <head>
+    {% load static %}
     <!-- Required for AMP -->
     <meta charset="utf-8">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
@@ -9,11 +10,9 @@
     <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
     <script async custom-element="amp-fit-text" src="https://cdn.ampproject.org/v0/amp-fit-text-0.1.js"></script>
 
-    <!-- Require a canonical link to HTML. Will put this on block later -->
-    <link rel="canonical" href="https://amp.dev/documentation/examples/introduction/hello_world/index.html">
-
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+    
     {% include "base-v2-css.html" %}
     
     <!-- Inline amp-boilerplate required as well -->
