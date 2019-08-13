@@ -2,6 +2,7 @@
 media/*
 core/settings.py
 core/shirt/migrations/00*.py
+.nfs*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
