@@ -1,9 +1,7 @@
-{% extends base_template %}
+{% extends "base.html" %}
+
 
 {% block title %}
-<!-- Require a canonical link to HTML. Will put this on block later -->
-<link rel="canonical" href="{{ request.build_absolute_uri }}">
-    
 <title>
 {{ shirt.name }} &middot; moe.ph
 </title>
@@ -22,12 +20,50 @@
 
 
 {% block content %}
-{% if request.GET.amp == "1" %}
 <div class="container">
-<amp-img src="{{ shirt.image.first.image.thumbnail.1028x1028.url }}" alt="{{ shirt.name }}" layout="responsive" width="600" height="600"></amp-img>
+<div>
+  <amp-carousel id="carouselWithPreview"
+    width="500"
+    height="500"
+    layout="responsive"
+    type="slides"
+    on="slideChange:carouselWithPreviewSelector.toggle(index=event.index, value=true)">
+    <amp-img src="{{ shirt.image.first.image.thumbnail.1028x1028.url }}"
+      layout="fill"
+      alt="a sample image"></amp-img>
+    <amp-img src="{{ shirt.image.first.image.zoom_75.1028x1028.url }}"
+      layout="fill"
+      alt="a sample image"></amp-img>
+    <amp-img src="{{ shirt.image.first.image.zoom_50.1028x1028.url }}"
+      layout="fill"
+      alt="a sample image"></amp-img>
+  </amp-carousel>
+  <amp-selector id="carouselWithPreviewSelector"
+    class="carousel-preview"
+    on="select:carouselWithPreview.goToSlide(index=event.targetOption)"
+    layout="container">
+    <amp-img option="0"
+      selected
+      src="{{ shirt.image.first.image.thumbnail.60x60.url }}"
+      width="60"
+      height="60"
+      alt="a sample image"></amp-img>
+    <amp-img option="1"
+      src="{{ shirt.image.first.image.zoom_75.60x60.url }}"
+      width="60"
+      height="60"
+      alt="a sample image"></amp-img>
+    <amp-img option="2"
+      src="{{ shirt.image.first.image.zoom_50.60x60.url }}"
+      width="60"
+      height="60"
+      alt="a sample image"></amp-img>
+  </amp-selector>
+</div>
 <br>
 <span class="post-date">Last Updated: {{ shirt.updated_at.date }}</span>
 <h1 class="post-title">{{ shirt.name }}</h1>
+<h3>{{ shirt.description }}</h3>
 <hr>
 <h3>Price: <small>P{{ shirt.price }}</small></h3>
 <h3>Available Sizes: <small>{{ shirt.get_available_sizes }}</small></h3>
@@ -35,76 +71,36 @@
 <h3>Brand: <small>{{ shirt.get_shirt_brand }}</small></h3>
 <h3>Shipping Fee: <br/><small>Luzon: PHP 85 / Manila: PHP 95 / Visayas: PHP 100 / Mindanao: PHP 105</small></h3>
 <h3 class="center">To order, just contact us in our Facebook Page <a href="https://facebook.com/be.moe.ph">moe.ph</a></h3>
+
 {% if shirt.gallery.all %}
 <hr>
 <h2>Customer Submitted Gallery</h2>
-<amp-carousel class="carousel-caption" layout="fixed-height" height="600" type="slides">
+<amp-carousel class="carousel-caption" layout="fixed-height" height="640" type="slides" id="GalleryCarousel" on="slideChange:GalleryCarouselSelector.toggle(index=event.index, value=true),carouselPreview.goToSlide(index=event.index)">
 {% for gallery in shirt.gallery.all %}
 <div class="slide">
-<amp-img src="{{ gallery.image.thumbnail.760x600.url }}" alt="{{ gallery.credit }}" layout="fill" width="760" height="600" attribution="CREDIT: PPPP"></amp-img>
+<amp-img src="{{ gallery.image.thumbnail.720x600.url }}" alt="{{ gallery.credit }}" layout="fill" width="600" height="600" attribution="{{ gallery.credit }}"></amp-img>
 {% if gallery.credit is not None %}
 <div class="caption">CREDIT: {{ gallery.credit | safe }} </div>
 {% endif %}
 </div>
 {% endfor %}
 </amp-carousel>
-</div>
-{% endif %}
-
-
-
-{% else %}
-<div class="container content">
-<div class="clearfix">
-<div class="post sm-col sm-col-12">
-    <img src="{{ shirt.image.first.image.thumbnail.1028x1028.url }}" alt="{{ shirt.name }}">
-</div>
-
-<div class="post sm-col sm-col-12">
-        
-        <span class="post-date">Last Updated: {{ shirt.updated_at.date }}</span>
-        <h1 class="post-title">{{ shirt.name }}</h1>
-        <hr>
-        <h3>Price: <small>P{{ shirt.price }}</small></h3>
-        <h3>Available Sizes: <small>{{ shirt.get_available_sizes }}</small></h3>
-        <h3>Print Type: <small>{{ shirt.get_print_type }}</small></h3>
-        <h3>Brand: <small>{{ shirt.get_shirt_brand }}</small></h3>
-        <h3>Shipping Fee: <br/><small>Luzon: PHP 85 / Manila: PHP 95 / Visayas: PHP 100 / Mindanao: PHP 105</small></h3>
-        <h3 class="center">To order, just contact us in our Facebook Page <a href="https://facebook.com/be.moe.ph">moe.ph</a></h3>
-</div>
-
-</div>
-
-{% if shirt.gallery.all %}
-<hr>
-<div class="clearfix">
-<h2>Customer Submitted Gallery</h2>
-{# for gallery in shirt.gallery.all #}
-<!--
-<div class="sm-col sm-col-12 md-col-6">
-<img src="{{ gallery.image.thumbnail.600x600.url }}" alt="{{ gallery.credit }}" />
-</div>
--->
-
-<amp-carousel class="carousel-caption" layout="fixed-height" height="600" type="slides">
-{% for gallery in shirt.gallery.all %}
-<div class="slide">
-<amp-img src="{{ gallery.image.thumbnail.760x600.url }}" alt="{{ gallery.credit }}" layout="fill" width="760" height="600"></amp-img>
-{% if gallery.credit is not None %}
-<div class="caption">CREDIT: {{ gallery.credit | safe }} </div>
-{% endif %}
-</div>
-{% endfor %}
-</amp-carousel>
-
-{# endfor #}
-</div>
-
+<amp-selector id="GalleryCarouselSelector"
+    on="select:GalleryCarousel.goToSlide(index=event.targetOption)"
+    layout="container">
+    <amp-carousel id="carouselPreview" class="carousel-preview" height="72" layout="fixed-height" type="carousel">
+    {% for gallery in shirt.gallery.all %}
+    <amp-img option="{{ forloop.counter0 }}"
+      {% if forloop.counter0 == 0 %} selected {% endif %}
+      src="{{ gallery.image.crop.60x60.url }}"
+      width="60"
+      height="60"
+      alt="a sample image"></amp-img>
+    {% endfor %}
+    </amp-carousel>
+  </amp-selector>
 {% endif %}
 
 </div>
-
-{% endif %}
-
 
 {% endblock %}
